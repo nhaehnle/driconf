@@ -268,6 +268,7 @@ def lineWrap (string, chars=30):
                 i = i - 1
             if i < chars/3:
                 i = chars
+                j = chars 
             head, tail = head + tail[:i] + '\n', tail[j:]
     return head
 
