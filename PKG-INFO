@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: driconf
+Version: 0.9.1
+Summary: A configuration applet for DRI drivers
+Home-page: http://dri.freedesktop.org/wiki/DriConf
+Author: Felix Kuehling
+Author-email: fxkuehl@gmx.de
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
