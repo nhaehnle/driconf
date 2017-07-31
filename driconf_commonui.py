@@ -66,13 +66,9 @@ mainWindow = None
 # Find a file that should have been installed in .../shared/driconf
 # Prefixes of __file__ are tried. And the current directory as a fallback.
 def findInShared (name):
-    # try all <prefix>/share/driconf/name for all prefixes of __file__
-    head,tail = os.path.split (__file__)
-    while head and tail:
-        f = os.path.join (head, "share/driconf", name)
-        if os.path.isfile (f):
-            return f
-        head,tail = os.path.split (head)
+    f = os.path.join ("/usr/share/driconf", name)
+    if os.path.isfile (f):
+        return f
     # try name in the current directory
     if os.path.isfile (name):
         return name
