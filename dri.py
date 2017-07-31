@@ -21,7 +21,9 @@
 import os
 import string
 import re
+import locale
 import xml.parsers.expat
+import driconf_commonui
 
 class Error (Exception):
     """ Base class for DRIError and XMLError """
