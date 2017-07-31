@@ -30,7 +30,7 @@ import gobject
 
 # Install translations. Search in the current directory first (for
 # easy testing). Then search in the default location and in
-# /usr/local/share/locale. If all this fails fall back to the null
+# /usr/share/locale. If all this fails fall back to the null
 # translation.
 try:
     _ = gettext.translation ("driconf", ".").ugettext
@@ -38,7 +38,7 @@ except IOError:
     try:
         _ = gettext.translation ("driconf").ugettext
     except IOError:
-        _ = gettext.translation ("driconf", "/usr/local/share/locale",
+        _ = gettext.translation ("driconf", "/usr/share/locale",
                                  fallback=True).ugettext
 
 # global variable: lang
