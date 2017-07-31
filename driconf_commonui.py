@@ -53,6 +53,9 @@ else:
 # encoding is only a dummy. Pango uses UTF-8 everywhere. :)
 del encoding
 
+# options that are semantically boolean values
+boolOpt = ["pp_celshade", "pp_jimenezmlaa", "pp_noblue", "pp_jimenezmlaa_color","pp_nored", "pp_nogreen", "force_glsl_version"] 
+
 # global variable: version
 version = "0.9.1"
 
@@ -94,6 +97,12 @@ def fileIsWritable(filename):
 # escape text that is going to be passed as markup to pango
 def escapeMarkup (text):
     return text.replace ("<", "&lt;").replace (">", "&gt;")
+
+def isSemanticBool(optName):
+    for i in boolOpt:
+	if i == optName:
+            return True 
+    return False 
 
 class StockImage (gtk.Image):
     """ A stock image. """
@@ -345,7 +354,8 @@ class OptionLine:
         type = opt.type
         if not self.isValid:
             type = "invalid"
-        if type == "bool":
+        if type == "bool" or isSemanticBool (opt.name):
+	# if type == "bool":
             self.widget = gtk.ToggleButton ()
             self.widget.set_use_stock (True)
             # Make sure the button doesn't change size when toggled
@@ -426,10 +436,17 @@ class OptionLine:
         if not self.label.get_active():
             return None
         elif self.widget.__class__ == gtk.ToggleButton:
+            bool = isSemanticBool (self.opt.name)
             if self.widget.get_active():
-                return "true"
+                if bool:
+                    return 1 
+                else:
+                    return "true"
             else:
-                return "false"
+                if bool:
+                    return 0 
+                else:
+                    return "false"
         elif self.widget.__class__ == SlideSpinner:
             return str(self.widget.getValue())
         elif self.widget.__class__ == WrappingOptionMenu:

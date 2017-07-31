@@ -63,7 +63,12 @@ def StrToValue (str, type):
 
     Raises an XMLError if str is not of the correct type. """
     try:
-        if type == "int" or type == "enum":
+	if type == "enum" and (str == "true" or str == "false"):
+	    if str == "true": 
+		return 1 
+	    elif str == "false":
+	        return 0 
+        elif type == "int" or type == "enum":
             return int (str);
         elif type == "float":
             return float (str);
@@ -480,7 +485,15 @@ class AppConfig:
         else:
             result = result + '>\n'
         for n, v in self.options.items ():
-            result = result + '            <option name="' + n + \
+            if type(v)==int:
+                if v==1:
+                    result = result + '            <option name="' + n + \
+                             '" value="1" />\n'
+                else:
+                    result = result + '            <option name="' + n + \
+                             '" value="0" />\n'
+            else:
+                result = result + '            <option name="' + n + \
                      '" value="' + v + '" />\n'
         result = result + '        </application>'
         return result
